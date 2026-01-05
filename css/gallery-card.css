@@ -1,0 +1,239 @@
+/* =========================
+   GALLERY SECTION
+========================= */
+.gallery-section {
+    padding: 70px 0 40px;
+    background: var(--primary-black);
+    position: relative;
+    overflow: hidden;
+}
+
+/* =========================
+   SCROLL CONTAINER
+========================= */
+.gallery-container {
+    display: flex;
+    gap: 24px;
+    padding: 20px 12px 30px;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    cursor: grab;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+
+    /* SNAP */
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 12px;
+
+    /* Scrollbar (PC) */
+    scrollbar-width: thin;
+    scrollbar-color: var(--champagne) rgba(212, 175, 55, 0.1);
+}
+
+.gallery-container:active {
+    cursor: grabbing;
+}
+
+.gallery-container::-webkit-scrollbar {
+    height: 6px;
+}
+
+.gallery-container::-webkit-scrollbar-track {
+    background: rgba(212, 175, 55, 0.1);
+    border-radius: 4px;
+}
+
+.gallery-container::-webkit-scrollbar-thumb {
+    background: var(--champagne);
+    border-radius: 4px;
+}
+
+/* =========================
+   CARD
+========================= */
+.gallery-card {
+    flex: 0 0 auto;
+    width: 320px; /* PC */
+    background: var(--card-black);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 2px solid rgba(230, 179, 14, 0.3);
+    position: relative;
+    cursor: pointer;
+
+    scroll-snap-align: start;
+
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.45);
+}
+
+/* =========================
+   IMAGE
+========================= */
+.gallery-image-container {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    position: relative;
+}
+
+.gallery-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.gallery-card:hover .gallery-image {
+    transform: scale(1.06);
+}
+
+/* =========================
+   CATEGORY BADGE
+========================= */
+.gallery-category-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(0, 0, 0, 0.8);
+    color: var(--champagne);
+    padding: 5px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    border: 1px solid var(--champagne);
+}
+
+/* =========================
+   INFO
+========================= */
+.gallery-info {
+    padding: 14px 16px 18px;
+}
+
+.gallery-title {
+    color: var(--champagne);
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 6px;
+}
+
+.gallery-description {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text-secondary);
+}
+
+/* =========================
+   TAGS
+========================= */
+.gallery-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.gallery-tag {
+    background: rgba(212, 175, 55, 0.1);
+    color: var(--light-champagne);
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+/* =========================
+   SCROLL HINT
+========================= */
+.gallery-scroll-hint {
+    text-align: center;
+    color: var(--champagne);
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    animation: pulse 2s infinite;
+}
+
+.gallery-scroll-hint i {
+    animation: bounceRight 2s infinite;
+}
+
+/* =========================
+   MOBILE OPTIMIZE
+========================= */
+@media (max-width: 768px) {
+    .gallery-container {
+        gap: 14px;
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .gallery-card {
+        width: 78vw;   /* 👈 đẹp nhất để vuốt */
+    }
+
+    .gallery-title {
+        font-size: 16px;
+    }
+
+    .gallery-description {
+        font-size: 14px;
+    }
+}
+
+/* =========================
+   LARGE SCREEN
+========================= */
+@media (min-width: 1200px) {
+    .gallery-card {
+        width: 340px;
+    }
+}
+
+/* =========================
+   SKELETON
+========================= */
+.gallery-skeleton {
+    display: flex;
+    gap: 24px;
+    padding: 20px 12px;
+}
+
+.skeleton-card {
+    width: 320px;
+    height: 360px;
+    border-radius: 20px;
+    background: linear-gradient(90deg, #222 25%, #2a2a2a 50%, #222 75%);
+    background-size: 200% 100%;
+    animation: skeletonLoading 1.5s infinite;
+}
+
+@keyframes skeletonLoading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* =========================
+   ANIMATIONS
+========================= */
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+@keyframes bounceRight {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(8px); }
+}

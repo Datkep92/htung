@@ -1,0 +1,185 @@
+/* sanbay.css - Airport page specific styles */
+
+/* Services Grid for Airport */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin: 40px 0;
+}
+
+.service-card {
+    background: rgba(30, 30, 30, 0.8);
+    border-radius: 16px;
+    padding: 25px;
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    transition: all 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--champagne);
+    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.2);
+}
+
+.service-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(212, 175, 55, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.service-icon i {
+    font-size: 24px;
+    color: var(--champagne);
+}
+
+/* Pricing Table */
+.pricing-grid {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.pricing-table {
+    background: rgba(30, 30, 30, 0.7);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    margin: 30px 0;
+}
+
+.price-item {
+    padding: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price-item:last-child {
+    border-bottom: none;
+}
+
+.price-item.primary {
+    background: rgba(212, 175, 55, 0.05);
+}
+
+.route-info {
+    flex: 1;
+}
+
+.route-name {
+    font-weight: 500;
+    color: var(--text-primary);
+    display: block;
+    margin-bottom: 5px;
+}
+
+.route-time {
+    font-size: 14px;
+    color: var(--text-tertiary);
+}
+
+.route-time i {
+    margin-right: 5px;
+}
+
+.price-info {
+    text-align: right;
+}
+
+.price-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--champagne);
+    display: block;
+    margin-bottom: 10px;
+}
+
+.btn-book {
+    background: rgba(212, 175, 55, 0.1);
+    color: var(--champagne);
+    border: 1px solid var(--champagne);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-book:hover {
+    background: var(--champagne);
+    color: #000;
+}
+
+/* FAQ */
+.faq-grid {
+    max-width: 800px;
+    margin: 30px auto 0;
+}
+
+.faq-item {
+    background: rgba(30, 30, 30, 0.7);
+    border-radius: 12px;
+    margin-bottom: 15px;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    overflow: hidden;
+}
+
+.faq-question {
+    padding: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+}
+
+.faq-question:hover {
+    background: rgba(212, 175, 55, 0.05);
+}
+
+.faq-answer {
+    padding: 0 20px;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.faq-item.active .faq-answer {
+    padding: 20px;
+    max-height: 500px;
+}
+
+/* Mobile Navigation for Airport Page */
+.bottom-tab-bar .tab-item.active {
+    background: rgba(212, 175, 55, 0.15);
+}
+
+.bottom-tab-bar .tab-item.active .tab-icon i {
+    color: var(--champagne);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .price-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .price-info {
+        text-align: center;
+    }
+    
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}

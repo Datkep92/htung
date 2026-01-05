@@ -1,0 +1,49 @@
+# robots.txt for LuxuryMove Website
+User-agent: *
+Allow: /
+Disallow: /admin-panel.html
+Disallow: /admin-settings.html
+Disallow: /test.html
+Disallow: /temp/
+Disallow: /private/
+Disallow: /cgi-bin/
+
+# Sitemap Location
+Sitemap: https://htutransport.com/sitemap.xml
+
+# Crawl-delay for heavy bots
+User-agent: GPTBot
+Crawl-delay: 10
+
+User-agent: ChatGPT-User
+Crawl-delay: 10
+
+User-agent: Claude-Web
+Crawl-delay: 10
+
+# Allow all image crawlers
+User-agent: Googlebot-Image
+Allow: /
+
+# Special instructions for search engines
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 2
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 2
+
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 3
+
+# Block bad bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /

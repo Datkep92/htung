@@ -1,0 +1,43 @@
+/* CRITICAL FIXES - CLS Web Vitals */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Reserve space for all critical elements */
+.header-placeholder {
+    height: 60px;
+    width: 100%;
+}
+
+.footer-placeholder {
+    height: 400px;
+    width: 100%;
+}
+
+/* Prevent layout shift during loading */
+.loading-placeholder {
+    background: var(--dark-black);
+    min-height: 200px;
+    border-radius: 12px;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Fix for images without dimensions */
+img:not([width]):not([height]) {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/9;
+}
+
+/* Critical fonts preload */
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-display: swap;
+}

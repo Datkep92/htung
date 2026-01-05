@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin.css">
+    <!-- Thêm Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-analytics-compat.js"></script>
+
+</head>
+<body>
+    <!-- Login Section -->
+    <div id="loginSection" style="display: none;">
+        <div style="max-width: 400px; margin: 100px auto; padding: 40px; background: var(--card-black); border-radius: 16px; border: 1px solid var(--champagne); text-align: center;">
+            <h1 class="login-title" style="font-size: 28px; margin-bottom: 10px; color: var(--champagne);">
+    <img src="https://cdn.jsdelivr.net/gh/Datkep92/hoangtung@main/images/htu_vuong512notext.jpg" 
+         alt="HTU Admin" 
+         width="40" 
+         height="40"
+         style="vertical-align: middle; margin-right: 10px;">
+    Admin
+</h1>
+            <p class="login-subtitle" style="color: var(--text-tertiary); margin-bottom: 30px;">Quản lý nội dung website</p>
+            
+            <div class="form-group" style="margin-bottom: 20px; text-align: left;">
+                <label class="form-label" style="display: block; margin-bottom: 8px; color: var(--text-secondary); font-weight: 500;">Mã Admin</label>
+                <input type="password" id="adminToken" class="form-input" placeholder="Mặc định: luxurymove2024" 
+                       style="width: 100%; padding: 12px 16px; background: var(--dark-black); border: 1px solid var(--text-tertiary); border-radius: 8px; color: var(--text-primary); font-size: 16px;">
+                <small style="color: var(--text-tertiary); font-size: 12px;">
+                    Trạng thái: <span id="savedTokenStatus">Chưa lưu</span>
+                </small>
+            </div>
+
+            <div style="display: flex; align-items: center; gap: 8px; margin: 20px 0;">
+                <input type="checkbox" id="rememberMe" style="width: 18px; height: 18px;">
+                <label for="rememberMe" style="color: var(--text-secondary); cursor: pointer; font-size: 14px;">
+                    Ghi nhớ thiết bị này
+                </label>
+            </div>
+            
+            <button onclick="handleLogin()" class="login-btn" 
+                    style="width: 100%; padding: 12px; background: var(--champagne); color: var(--primary-black); border: none; border-radius: 8px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                <i class="fas fa-sign-in-alt"></i> Đăng nhập
+            </button>
+            
+            <div id="loginError" class="error-message" style="display: none; color: var(--danger); font-size: 13px; margin-top: 10px; padding: 8px 12px; background: rgba(255,68,68,0.1); border-radius: 6px; align-items: center; gap: 8px;"></div>
+        </div>
+    </div>
+
+    <!-- Auto Login Messages -->
+    <div id="autoLoginLoading" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: none; align-items: center; justify-content: center; z-index: 10000;">
+        <div style="text-align: center; color: var(--text-primary);">
+            <div class="loading-spinner" style="width: 40px; height: 40px; border: 3px solid var(--champagne); border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 15px;"></div>
+            <p>Đang kiểm tra đăng nhập...</p>
+        </div>
+    </div>
+
+    <div id="autoLoginSuccess" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: none; align-items: center; justify-content: center; z-index: 10000;">
+        <div style="text-align: center; color: var(--text-primary); background: var(--card-black); padding: 40px; border-radius: 16px; border: 1px solid var(--success);">
+            <div class="success-icon" style="color: var(--success); font-size: 40px; margin-bottom: 15px;">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3 style="color: var(--success); margin-bottom: 10px;">Đăng nhập thành công!</h3>
+            <p>Đang chuyển hướng...</p>
+        </div>
+    </div>
+
+    <!-- Editor Section -->
+    <div id="editorSection" class="container" style="display: none;">
+        <!-- Header -->
+        <div class="admin-header">
+            <div class="admin-logo">
+                <i class="fas fa-crown"></i>
+                Admin
+            </div>
+            <div class="admin-actions">
+                <button class="btn btn-secondary" onclick="showModal('tokenModal')">
+                    <i class="fas fa-key"></i> Token
+                </button>
+               
+                <button class="btn btn-secondary" onclick="logoutAdmin()">
+                    <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                </button>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="showTab('services')">
+                <i class="fas fa-car"></i> Dịch vụ
+            </button>
+            <button class="tab-btn" onclick="showTab('experiences')">
+                <i class="fas fa-users"></i> Trải nghiệm
+            </button>
+            <button class="tab-btn" onclick="showTab('gallery')">
+                <i class="fas fa-images"></i> Gallery
+            </button>
+            <button class="tab-btn" onclick="showTab('blog')">
+                <i class="fas fa-newspaper"></i> Blog
+            </button>
+            <button class="tab-btn" onclick="showTab('statistics')">
+                <i class="fas fa-chart-bar"></i> Thống kê
+            </button>
+            <button class="tab-btn" onclick="showTab('telegram')">
+                <i class="fab fa-telegram"></i> Telegram
+            </button>
+        </div>
+
+        <!-- Tab Contents -->
+        <div id="servicesTab" class="tab-content active">
+            <div class="admin-header">
+                <h2 class="modal-title">Quản lý Dịch vụ</h2>
+                <button class="btn btn-primary" onclick="openEditor('service')">
+                    <i class="fas fa-plus"></i> Thêm dịch vụ
+                </button>
+            </div>
+            <div id="servicesList" class="grid"></div>
+        </div>
+
+        <div id="experiencesTab" class="tab-content">
+            <div class="admin-header">
+                <h2 class="modal-title">Quản lý Trải nghiệm</h2>
+                <button class="btn btn-primary" onclick="openEditor('experience')">
+                    <i class="fas fa-plus"></i> Thêm trải nghiệm
+                </button>
+            </div>
+            <div id="experiencesList" class="grid"></div>
+        </div>
+
+        <div id="galleryTab" class="tab-content">
+            <div class="admin-header">
+                <h2 class="modal-title">Quản lý Gallery</h2>
+                <button class="btn btn-primary" onclick="openEditor('gallery')">
+                    <i class="fas fa-plus"></i> Thêm ảnh
+                </button>
+            </div>
+            <div id="galleryList" class="grid"></div>
+        </div>
+
+        <div id="blogTab" class="tab-content">
+            <div class="admin-header">
+                <h2 class="modal-title">Quản lý Blog</h2>
+                <button class="btn btn-primary" onclick="openEditor('blog')">
+                    <i class="fas fa-plus"></i> Thêm bài viết
+                </button>
+            </div>
+            <div id="blogList" class="grid"></div>
+        </div>
+    </div>
+
+    <!-- Universal Editor Modal -->
+    <div id="editorModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="editorModalTitle">Thêm mới</h2>
+                <button class="modal-close" onclick="closeEditor()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="editorModalBody">
+                <!-- Form sẽ được tạo động bằng JS -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="saveItem()" style="flex: 1;">
+                    <i class="fas fa-save"></i> Lưu
+                </button>
+                <button class="btn btn-danger" onclick="deleteItem()" id="deleteItemBtn" style="display: none;">
+                    <i class="fas fa-trash"></i> Xóa
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Token Modal -->
+    <div id="tokenModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title"><i class="fas fa-key"></i> Quản lý Token</h2>
+                <button class="modal-close" onclick="closeModal('tokenModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Token hiện tại</label>
+                    <input type="text" id="currentTokenDisplay" class="form-input" readonly>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Token mới</label>
+                    <input type="password" id="newToken" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Xác nhận token</label>
+                    <input type="password" id="confirmToken" class="form-input">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="updateToken()" style="flex: 1;">
+                    <i class="fas fa-save"></i> Cập nhật
+                </button>
+                <button class="btn btn-secondary" onclick="closeModal('tokenModal')">
+                    <i class="fas fa-times"></i> Đóng
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- GitHub Modal -->
+    <div id="githubModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title"><i class="fab fa-github"></i> Cấu hình GitHub</h2>
+                <button class="modal-close" onclick="closeModal('githubModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Username</label>
+                    <input type="text" id="githubUsername" class="form-input" value="Datkep92">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Repository</label>
+                    <input type="text" id="githubRepo" class="form-input" value="hoangtung">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Branch</label>
+                    <input type="text" id="githubBranch" class="form-input" value="main">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">GitHub Token</label>
+                    <input type="password" id="githubTokenModal" class="form-input" placeholder="ghp_xxxxxxxxxxxx">
+                </div>
+                <div id="githubStatus"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" onclick="testGitHubConnection()">
+                    <i class="fas fa-plug"></i> Kiểm tra
+                </button>
+                <button class="btn btn-primary" onclick="saveGitHubConfig()" style="flex: 1;">
+                    <i class="fas fa-save"></i> Lưu
+                </button>
+                <button class="btn btn-secondary" onclick="closeModal('githubModal')">
+                    <i class="fas fa-times"></i> Đóng
+                </button>
+            </div>
+        </div>
+    </div>
+<div id="statisticsTab" class="tab-content">
+    <div class="admin-header">
+        <h2 class="modal-title">Quản lý Thống kê</h2>
+        <div class="admin-actions">
+            <button class="btn btn-success" onclick="statisticsManager.updateStatistics(true)">
+                <i class="fas fa-sync-alt"></i> Cập nhật ngay
+            </button>
+            <button class="btn btn-warning" onclick="statisticsManager.resetDailyStatistics()">
+                <i class="fas fa-redo"></i> Reset ngày mới
+            </button>
+        </div>
+    </div>
+    
+    <div class="stats-controls">
+        <!-- Phần 1: Live Preview -->
+        <div class="control-group">
+            <h3><i class="fas fa-tv"></i> Xem trước trực tiếp</h3>
+            <div class="live-preview" id="livePreview">
+                <div class="loading-spinner"></div>
+            </div>
+        </div>
+        
+        <!-- Phần 2: Cài đặt cơ bản -->
+        <div class="control-group">
+            <h3><i class="fas fa-sliders-h"></i> Cài đặt cơ bản</h3>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Tổng số xe</label>
+                    <input type="number" id="totalCars" class="form-input" min="1" max="50" 
+                           onchange="statisticsManager.updateConfigField('total_cars', this.value)">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Số online cơ bản</label>
+                    <input type="number" id="baseOnline" class="form-input" min="1" max="100"
+                           onchange="statisticsManager.updateConfigField('base_online', this.value)">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Booking cơ bản/ngày</label>
+                    <input type="number" id="baseBookings" class="form-input" min="0" max="50"
+                           onchange="statisticsManager.updateConfigField('base_bookings', this.value)">
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Hệ số cuối tuần</label>
+                    <div class="range-container">
+                        <input type="range" id="weekendBoost" class="form-range" min="100" max="200" step="5"
+                               onchange="statisticsManager.updateConfigField('weekend_boost', this.value/100)">
+                        <span id="weekendBoostValue">130%</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">
+                        <input type="checkbox" id="autoUpdate" 
+                               onchange="statisticsManager.updateConfigField('auto_update', this.checked)">
+                        Tự động cập nhật (30s)
+                    </label>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Phần 3: Hệ số theo giờ -->
+        <div class="control-group">
+            <h3><i class="fas fa-clock"></i> Hệ số theo giờ</h3>
+            
+            <div class="multiplier-grid">
+                <div class="multiplier-item">
+                    <label>00:00 - 06:00 (Đêm khuya)</label>
+                    <div class="range-container">
+                        <input type="range" id="multNight" class="multiplier-range" data-key="00-06" 
+                               min="5" max="50" step="5"
+                               onchange="statisticsManager.updateMultiplier('00-06', this.value/100)">
+                        <span id="multNightValue">20%</span>
+                    </div>
+                </div>
+                
+                <div class="multiplier-item">
+                    <label>06:00 - 09:00 (Sáng sớm)</label>
+                    <div class="range-container">
+                        <input type="range" id="multMorning" class="multiplier-range" data-key="06-09" 
+                               min="30" max="80" step="5"
+                               onchange="statisticsManager.updateMultiplier('06-09', this.value/100)">
+                        <span id="multMorningValue">60%</span>
+                    </div>
+                </div>
+                
+                <div class="multiplier-item">
+                    <label>09:00 - 12:00 (Sáng)</label>
+                    <div class="range-container">
+                        <input type="range" id="multLateMorning" class="multiplier-range" data-key="09-12" 
+                               min="60" max="120" step="5"
+                               onchange="statisticsManager.updateMultiplier('09-12', this.value/100)">
+                        <span id="multLateMorningValue">90%</span>
+                    </div>
+                </div>
+                
+                <div class="multiplier-item">
+                    <label>12:00 - 14:00 (Trưa)</label>
+                    <div class="range-container">
+                        <input type="range" id="multNoon" class="multiplier-range" data-key="12-14" 
+                               min="80" max="120" step="5"
+                               onchange="statisticsManager.updateMultiplier('12-14', this.value/100)">
+                        <span id="multNoonValue">100%</span>
+                    </div>
+                </div>
+                
+                <div class="multiplier-item">
+                    <label>14:00 - 18:00 (Chiều)</label>
+                    <div class="range-container">
+                        <input type="range" id="multAfternoon" class="multiplier-range" data-key="14-18" 
+                               min="100" max="150" step="5"
+                               onchange="statisticsManager.updateMultiplier('14-18', this.value/100)">
+                        <span id="multAfternoonValue">120%</span>
+                    </div>
+                </div>
+                
+                <div class="multiplier-item">
+                    <label>18:00 - 21:00 (Tối - Cao điểm)</label>
+                    <div class="range-container">
+                        <input type="range" id="multEvening" class="multiplier-range" data-key="18-21" 
+                               min="120" max="200" step="5"
+                               onchange="statisticsManager.updateMultiplier('18-21', this.value/100)">
+                        <span id="multEveningValue">150%</span>
+                    </div>
+                </div>
+                
+                <div class="multiplier-item">
+                    <label>21:00 - 24:00 (Tối muộn)</label>
+                    <div class="range-container">
+                        <input type="range" id="multLateEvening" class="multiplier-range" data-key="21-24" 
+                               min="50" max="120" step="5"
+                               onchange="statisticsManager.updateMultiplier('21-24', this.value/100)">
+                        <span id="multLateEveningValue">80%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Phần 4: Manual Override -->
+        <div class="control-group">
+            <h3><i class="fas fa-edit"></i> Điều chỉnh thủ công</h3>
+            <p class="form-note">Ghi đè giá trị tự động (để trống để dùng tự động)</p>
+            
+            <div class="override-grid">
+                <div class="override-item">
+                    <label>👤 Số người online</label>
+                    <div class="override-controls">
+                        <input type="number" id="overrideOnline" class="form-input-sm" 
+                               min="0" max="200" placeholder="Tự động">
+                        <button class="btn-override" onclick="statisticsManager.applyOverride('online')">
+                            Áp dụng
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="override-item">
+                    <label>📅 Booking hôm nay</label>
+                    <div class="override-controls">
+                        <input type="number" id="overrideBookings" class="form-input-sm" 
+                               min="0" max="50" placeholder="Tự động">
+                        <button class="btn-override" onclick="statisticsManager.applyOverride('bookings')">
+                            Áp dụng
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="override-item">
+                    <label>🚗 Xe trống</label>
+                    <div class="override-controls">
+                        <input type="number" id="overrideCars" class="form-input-sm" 
+                               min="0" max="50" placeholder="Tự động">
+                        <button class="btn-override" onclick="statisticsManager.applyOverride('cars')">
+                            Áp dụng
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 15px; display: flex; gap: 10px;">
+                <button class="btn btn-secondary" onclick="statisticsManager.clearOverrides()">
+                    <i class="fas fa-undo"></i> Xóa ghi đè
+                </button>
+                <button class="btn btn-info" onclick="statisticsManager.calculatePreview()">
+                    <i class="fas fa-calculator"></i> Tính toán thử
+                </button>
+            </div>
+        </div>
+        
+        <!-- Phần 5: Dữ liệu thực -->
+        <div class="control-group">
+            <h3><i class="fas fa-database"></i> Dữ liệu thực</h3>
+            
+            <div class="real-data-grid">
+                <div class="real-data-item">
+                    <div class="real-data-label">
+                        <i class="fas fa-users"></i> User online thực
+                    </div>
+                    <div class="real-data-value" id="realOnlineCount">0</div>
+                    <div class="real-data-sub">(active trong 5 phút)</div>
+                </div>
+                
+                <div class="real-data-item">
+                    <div class="real-data-label">
+                        <i class="fas fa-calendar-check"></i> Booking thực hôm nay
+                    </div>
+                    <div class="real-data-value" id="realBookingsCount">0</div>
+                    <div class="real-data-sub">(confirmed)</div>
+                </div>
+                
+                <div class="real-data-item">
+                    <div class="real-data-label">
+                        <i class="fas fa-history"></i> Tổng session
+                    </div>
+                    <div class="real-data-value" id="totalSessionsCount">0</div>
+                    <div class="real-data-sub">(all time)</div>
+                </div>
+                
+                <div class="real-data-item">
+                    <div class="real-data-label">
+                        <i class="fas fa-chart-line"></i> Tổng booking
+                    </div>
+                    <div class="real-data-value" id="totalBookingsCount">0</div>
+                    <div class="real-data-sub">(all time)</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 15px; display: flex; gap: 10px;">
+                <button class="btn btn-primary" onclick="statisticsManager.refreshRealData()">
+                    <i class="fas fa-redo"></i> Làm mới dữ liệu
+                </button>
+                <button class="btn btn-danger" onclick="statisticsManager.clearOldSessions()">
+                    <i class="fas fa-trash"></i> Xóa session cũ
+                </button>
+            </div>
+        </div>
+        
+        <!-- Phần 6: Logs -->
+        <div class="control-group">
+            <h3><i class="fas fa-history"></i> Lịch sử thay đổi</h3>
+            
+            <div class="logs-container" id="logsContainer">
+                <div class="loading-spinner"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Thêm tab content cho Telegram (đặt trước phần Status Bar) -->
+<div id="telegramTab" class="tab-content">
+    <div class="admin-header">
+        <h2 class="modal-title">Quản lý Telegram</h2>
+        <button class="btn btn-primary" onclick="openTelegramConfig()">
+            <i class="fas fa-plus"></i> Thêm cấu hình
+        </button>
+    </div>
+    
+    <div class="telegram-configs" id="telegramConfigs">
+        <div class="loading-spinner"></div>
+    </div>
+    
+    <div class="telegram-info">
+        <h3><i class="fas fa-info-circle"></i> Hướng dẫn sử dụng</h3>
+        <ul>
+            <li>Mỗi bot token có thể gửi thông báo đến nhiều chat ID</li>
+            <li>Bot token: Lấy từ <a href="https://t.me/BotFather" target="_blank">@BotFather</a></li>
+            <li>Chat ID: Sử dụng bot <a href="https://t.me/userinfobot" target="_blank">@userinfobot</a> để lấy ID</li>
+            <li>Đánh dấu "Mặc định" để sử dụng cho trang chủ</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Modal Telegram Config -->
+<div id="telegramModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 class="modal-title" id="telegramModalTitle">
+                <i class="fab fa-telegram"></i> Cấu hình Telegram
+            </h2>
+            <button class="modal-close" onclick="closeModal('telegramModal')">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label class="form-label">Tên cấu hình *</label>
+                <input type="text" id="telegramName" class="form-input" placeholder="Ví dụ: Booking Bot Chính">
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Bot Token *</label>
+                <div class="input-with-action">
+                    <input type="password" id="telegramBotToken" class="form-input" 
+                           placeholder="8531709938:AAHx...">
+                    <button type="button" class="btn-icon" onclick="toggleTokenVisibility('telegramBotToken')">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Chat IDs (mỗi ID một dòng) *</label>
+                <textarea id="telegramChatIds" class="form-input" rows="4" 
+                         placeholder="6372876364&#10;1234567890"></textarea>
+                <small>Mỗi Chat ID trên một dòng</small>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">
+                    <input type="checkbox" id="telegramIsDefault" class="form-checkbox">
+                    Sử dụng làm cấu hình mặc định
+                </label>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">Trạng thái</label>
+                <div class="status-test" id="telegramTestStatus"></div>
+            </div>
+            
+            <input type="hidden" id="telegramConfigId">
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-success" onclick="testTelegramConnection()">
+                <i class="fas fa-plug"></i> Kiểm tra kết nối
+            </button>
+            <button class="btn btn-primary" onclick="saveTelegramConfig()" style="flex: 1;">
+                <i class="fas fa-save"></i> Lưu
+            </button>
+            <button class="btn btn-danger" onclick="deleteTelegramConfig()" id="deleteTelegramBtn" style="display: none;">
+                <i class="fas fa-trash"></i> Xóa
+            </button>
+        </div>
+    </div>
+</div>
+    <!-- Status Bar -->
+    <div class="status-bar" id="statusBar">
+        <i class="fas fa-check-circle" id="statusIcon"></i>
+        <span id="statusMessage"></span>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+    <script src="js/statistics-manager.js"></script>
+    <script src="js/gallery.js"></script>
+<script src="js/admin-pricing.js"></script>
+    <script src="js/admin.js"></script>
+    
+
+</body>
+</html>

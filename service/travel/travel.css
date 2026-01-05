@@ -1,0 +1,731 @@
+
+        :root {
+            --gold-primary: #D4AF37;
+            --gold-secondary: #F0D89C;
+            --gold-dark: #B8941F;
+            --gold-glow: rgba(212, 175, 55, 0.3);
+            --diamond-glow: rgba(185, 242, 255, 0.3);
+            --black-bg: #0A0A0A;
+            --card-bg: #1A1A1A;
+            --card-border: rgba(212, 175, 55, 0.2);
+        }
+
+        /* Header CTA */
+        .header-cta {
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+            padding: 15px 0;
+            text-align: center;
+            box-shadow: 0 4px 20px var(--gold-glow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 0 16px;
+        }
+
+        .cta-btn {
+            padding: 12px 28px;
+            background: rgba(0,0,0,0.8);
+            border: 2px solid var(--gold-primary);
+            border-radius: 50px;
+            color: var(--gold-secondary);
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 160px;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .cta-btn:hover {
+            background: var(--gold-primary);
+            color: var(--black-bg);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--gold-glow);
+        }
+
+        /* Fixed Destination Tabs */
+        .destination-tabs {
+            position: sticky;
+            top: 60px;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--card-border);
+            z-index: 100;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        .dest-tab {
+            padding: 12px 24px;
+            background: transparent;
+            border: 2px solid transparent;
+            border-radius: 30px;
+            color: var(--text-tertiary);
+            font-weight: 600;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dest-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .dest-tab.active {
+            color: var(--black-bg);
+            border-color: var(--gold-primary);
+            background: var(--gold-primary);
+            box-shadow: 0 4px 15px var(--gold-glow);
+        }
+
+        .dest-tab.active::before {
+            opacity: 1;
+        }
+
+        .dest-tab:not(.active):hover {
+            border-color: var(--gold-primary);
+            color: var(--gold-secondary);
+            transform: translateY(-1px);
+        }
+
+        /* Luxury Hero Section */
+        .luxury-hero {
+            padding: 40px 16px;
+            background: linear-gradient(180deg, #0A0A0A 0%, #111111 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .luxury-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                var(--gold-primary), 
+                transparent);
+        }
+
+        .destination-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .destination-title h2 {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--gold-primary);
+            margin-bottom: 10px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .destination-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold-primary), var(--gold-dark));
+            border-radius: 2px;
+        }
+
+        .destination-tagline {
+            font-size: 18px;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Premium Image Showcase */
+        .premium-showcase {
+            max-width: 800px;
+            margin: 0 auto 40px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            border: 1px solid var(--card-border);
+        }
+
+        .showcase-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .showcase-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 25px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            color: white;
+        }
+
+        .showcase-caption {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--gold-secondary);
+            margin-bottom: 5px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .showcase-subtitle {
+            font-size: 16px;
+            color: rgba(255,255,255,0.9);
+            font-style: italic;
+        }
+
+        /* Luxury Attractions */
+        .luxury-attractions {
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        .attractions-title {
+            font-size: 22px;
+            color: var(--gold-primary);
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .attractions-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: var(--gold-primary);
+        }
+
+        .attraction-item {
+            background: rgba(26, 26, 26, 0.8);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border: 1px solid var(--card-border);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .attraction-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--gold-primary), var(--gold-dark));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .attraction-item:hover {
+            transform: translateX(5px);
+            border-color: var(--gold-primary);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .attraction-item:hover::before {
+            opacity: 1;
+        }
+
+        .attraction-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--gold-secondary);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .attraction-name i {
+            color: var(--gold-primary);
+        }
+
+        .attraction-desc {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            padding-left: 28px;
+        }
+
+        /* Luxury Book Button */
+        .luxury-book-btn {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            margin: 40px auto;
+            padding: 18px 30px;
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+            color: var(--black-bg);
+            font-size: 18px;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            text-decoration: none;
+            box-shadow: 0 10px 30px var(--gold-glow);
+        }
+
+        .luxury-book-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -60%;
+            width: 20%;
+            height: 200%;
+            background: rgba(255,255,255,0.3);
+            transform: rotate(30deg);
+            transition: all 0.5s ease;
+        }
+
+        .luxury-book-btn:hover::after {
+            left: 150%;
+        }
+
+        .luxury-book-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px var(--gold-glow);
+        }
+
+        .luxury-book-btn:active {
+            transform: translateY(-1px);
+        }
+
+       
+        /* Responsive */
+        @media (max-width: 768px) {
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+            }
+            
+            .cta-btn {
+                width: 100%;
+                max-width: 280px;
+            }
+            
+            .destination-tabs {
+                top: 60px;
+                padding: 10px;
+                gap: 5px;
+            }
+            
+            .dest-tab {
+                padding: 10px 16px;
+                font-size: 14px;
+                flex: 1;
+                text-align: center;
+            }
+            
+            .premium-showcase {
+                border-radius: 15px;
+            }
+            
+            .showcase-image {
+                height: 300px;
+            }
+            
+            .destination-title h2 {
+                font-size: 28px;
+            }
+            
+            .luxury-book-btn {
+                padding: 16px 24px;
+                font-size: 16px;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .showcase-image {
+                height: 250px;
+            }
+            
+            .destination-title h2 {
+                font-size: 24px;
+            }
+            
+            .attraction-item {
+                padding: 16px;
+            }
+            
+            .attraction-name {
+                font-size: 16px;
+            }
+            
+            .attraction-desc {
+                font-size: 14px;
+            }
+        }
+
+        /* Animation for tab content */
+        .destination-content {
+            display: none;
+            animation: fadeInLuxury 0.6s ease;
+        }
+
+        .destination-content.active {
+            display: block;
+        }
+
+        @keyframes fadeInLuxury {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Diamond effect */
+        .diamond-effect {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle at 30% 30%, rgba(185, 242, 255, 0.1), transparent 70%);
+            pointer-events: none;
+            z-index: 1;
+        }
+/* ===== LUXURY BENEFITS SECTION ===== */
+.luxury-benefits {
+    background: linear-gradient(180deg, #0A0A0A 0%, #111111 100%);
+    padding: 60px 16px;
+    position: relative;
+    border-top: 1px solid rgba(212, 175, 55, 0.2);
+    border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+.luxury-benefits::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(185, 242, 255, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.benefits-header {
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.benefits-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--gold-primary);
+    margin-bottom: 15px;
+    position: relative;
+    display: inline-block;
+}
+
+.benefits-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold-primary), var(--gold-dark));
+    border-radius: 2px;
+}
+
+.benefits-subtitle {
+    font-size: 18px;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Benefits Grid */
+.benefits-grid-luxury {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.benefit-card-luxury {
+    background: rgba(26, 26, 26, 0.7);
+    border-radius: 20px;
+    padding: 30px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    backdrop-filter: blur(10px);
+}
+
+.benefit-card-luxury::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), transparent 50%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.benefit-card-luxury:hover {
+    transform: translateY(-8px);
+    border-color: var(--gold-primary);
+    box-shadow: 0 15px 40px rgba(212, 175, 55, 0.2);
+}
+
+.benefit-card-luxury:hover::before {
+    opacity: 1;
+}
+
+/* Benefit Icon */
+.benefit-icon-luxury {
+    width: 70px;
+    height: 70px;
+    min-width: 70px;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.05));
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    transition: all 0.4s ease;
+}
+
+.benefit-card-luxury:hover .benefit-icon-luxury {
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.25), rgba(212, 175, 55, 0.15));
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+}
+
+.benefit-icon-luxury i {
+    font-size: 28px;
+    color: var(--gold-primary);
+    transition: all 0.4s ease;
+}
+
+.benefit-card-luxury:hover .benefit-icon-luxury i {
+    color: var(--gold-secondary);
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+}
+
+/* Benefit Info */
+.benefit-info-luxury {
+    flex: 1;
+}
+
+.benefit-title-luxury {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--gold-secondary);
+    margin-bottom: 10px;
+    position: relative;
+    padding-bottom: 8px;
+}
+
+.benefit-title-luxury::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold-primary), transparent);
+    transition: width 0.4s ease;
+}
+
+.benefit-card-luxury:hover .benefit-title-luxury::after {
+    width: 60px;
+}
+
+.benefit-desc-luxury {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Diamond decorations */
+.benefit-card-luxury::after {
+    content: '✦';
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: rgba(212, 175, 55, 0.3);
+    font-size: 12px;
+    transition: all 0.4s ease;
+}
+
+.benefit-card-luxury:hover::after {
+    color: var(--gold-primary);
+    transform: scale(1.5);
+    text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .luxury-benefits {
+        padding: 40px 16px;
+    }
+    
+    .benefits-title {
+        font-size: 28px;
+    }
+    
+    .benefits-subtitle {
+        font-size: 16px;
+        padding: 0 10px;
+    }
+    
+    .benefits-grid-luxury {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0 10px;
+    }
+    
+    .benefit-card-luxury {
+        padding: 25px 20px;
+        gap: 15px;
+    }
+    
+    .benefit-icon-luxury {
+        width: 60px;
+        height: 60px;
+        min-width: 60px;
+        border-radius: 15px;
+    }
+    
+    .benefit-icon-luxury i {
+        font-size: 24px;
+    }
+    
+    .benefit-title-luxury {
+        font-size: 18px;
+    }
+    
+    .benefit-desc-luxury {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .benefits-title {
+        font-size: 24px;
+    }
+    
+    .benefit-card-luxury {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+    
+    .benefit-icon-luxury {
+        margin-bottom: 15px;
+    }
+    
+    .benefit-title-luxury::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+/* Animation for cards */
+@keyframes fadeInUpCard {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.benefit-card-luxury {
+    animation: fadeInUpCard 0.6s ease forwards;
+    opacity: 0;
+}
+
+.benefit-card-luxury:nth-child(1) { animation-delay: 0.1s; }
+.benefit-card-luxury:nth-child(2) { animation-delay: 0.2s; }
+.benefit-card-luxury:nth-child(3) { animation-delay: 0.3s; }
+.benefit-card-luxury:nth-child(4) { animation-delay: 0.4s; }
+.benefit-card-luxury:nth-child(5) { animation-delay: 0.5s; }
+.benefit-card-luxury:nth-child(6) { animation-delay: 0.6s; }

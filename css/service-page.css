@@ -1,0 +1,467 @@
+/* Service Page Specific Styles */
+.service-detail-page {
+    padding: 40px 0;
+    min-height: 60vh;
+}
+
+.breadcrumb {
+    padding: 15px 0;
+    margin-top: 60px;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+.breadcrumb ol {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.breadcrumb li {
+    display: flex;
+    align-items: center;
+    color: var(--text-tertiary);
+    font-size: 14px;
+}
+
+.breadcrumb li:not(:last-child)::after {
+    content: "/";
+    margin: 0 10px;
+    color: var(--text-tertiary);
+}
+
+.breadcrumb a {
+    color: var(--champagne);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.breadcrumb a:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+.logo-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(212, 175, 55, 0.1);
+    color: var(--champagne);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.logo-back:hover {
+    background: rgba(212, 175, 55, 0.2);
+    transform: translateX(-3px);
+}
+
+/* Service Detail Content */
+.service-detail-content {
+    background: var(--card-black);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    margin-bottom: 40px;
+}
+
+.service-hero {
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+}
+
+.service-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.service-hero-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+    padding: 30px;
+    color: white;
+}
+
+.service-hero-title {
+    font-size: 32px;
+    margin: 0 0 10px 0;
+    color: white;
+}
+
+.service-hero-subtitle {
+    font-size: 18px;
+    color: var(--champagne);
+    margin: 0;
+    font-weight: 500;
+}
+
+.service-info {
+    padding: 30px;
+}
+
+.service-section {
+    margin-bottom: 30px;
+}
+
+.service-section h3 {
+    color: var(--champagne);
+    margin-bottom: 15px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.service-section h3 i {
+    font-size: 18px;
+}
+
+.service-description {
+    color: var(--text-secondary);
+    line-height: 1.8;
+    font-size: 16px;
+}
+
+/* Features Grid */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 15px;
+    background: rgba(30, 30, 30, 0.5);
+    border-radius: 10px;
+    border-left: 3px solid var(--champagne);
+}
+
+.feature-item i {
+    color: var(--champagne);
+    margin-top: 2px;
+    font-size: 16px;
+}
+
+.feature-item span {
+    color: var(--text-secondary);
+    flex: 1;
+}
+
+/* Pricing Table */
+.pricing-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.pricing-table th,
+.pricing-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pricing-table th {
+    color: var(--champagne);
+    font-weight: 600;
+    background: rgba(30, 30, 30, 0.5);
+}
+
+.pricing-table td {
+    color: var(--text-secondary);
+}
+
+.price-value {
+    color: var(--champagne);
+    font-weight: 600;
+    font-size: 18px;
+}
+
+/* Gallery */
+.service-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.gallery-item {
+    height: 150px;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Call to Action */
+.service-cta {
+    background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+    padding: 50px 0;
+    text-align: center;
+    margin: 40px 0;
+    border-radius: 20px;
+}
+
+.service-cta h3 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: white;
+}
+
+.service-cta p {
+    color: var(--text-tertiary);
+    margin-bottom: 30px;
+    font-size: 16px;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Related Services */
+.related-services {
+    padding: 40px 0;
+}
+
+.related-services h3 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 24px;
+    color: white;
+}
+
+.related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+}
+
+.related-card {
+    background: var(--card-black);
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: block;
+    color: inherit;
+}
+
+.related-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(212, 175, 55, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.related-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.related-card-content {
+    padding: 20px;
+}
+
+.related-card h4 {
+    color: white;
+    margin: 0 0 10px 0;
+    font-size: 18px;
+}
+
+.related-card p {
+    color: var(--text-tertiary);
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Loading State */
+.loading-service {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-tertiary);
+}
+
+.loading-service i {
+    font-size: 40px;
+    margin-bottom: 20px;
+    display: block;
+    color: var(--champagne);
+}
+
+/* Service List Page */
+.service-list-page {
+    padding: 40px 0;
+}
+
+.service-list-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.service-list-header h1 {
+    font-size: 36px;
+    color: white;
+    margin-bottom: 15px;
+}
+
+.service-list-header p {
+    color: var(--text-tertiary);
+    font-size: 18px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.service-list-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.service-list-card {
+    background: var(--card-black);
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: block;
+    color: inherit;
+    height: 100%;
+}
+
+.service-list-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(212, 175, 55, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.service-list-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.service-list-content {
+    padding: 25px;
+}
+
+.service-list-content h3 {
+    color: white;
+    margin: 0 0 15px 0;
+    font-size: 20px;
+}
+
+.service-list-content p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.service-list-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.service-list-features span {
+    background: rgba(212, 175, 55, 0.1);
+    color: var(--champagne);
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.service-list-link {
+    color: var(--champagne);
+    text-decoration: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.service-list-link:hover {
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .service-hero {
+        height: 200px;
+    }
+    
+    .service-hero-title {
+        font-size: 24px;
+    }
+    
+    .service-info {
+        padding: 20px;
+    }
+    
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .cta-buttons .btn {
+        width: 100%;
+        max-width: 300px;
+    }
+    
+    .related-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .service-list-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .breadcrumb li {
+        font-size: 12px;
+    }
+    
+    .service-section h3 {
+        font-size: 18px;
+    }
+    
+    .pricing-table {
+        display: block;
+        overflow-x: auto;
+    }
+}
