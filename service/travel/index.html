@@ -4,7 +4,7 @@
     <!-- ========== META CHARSET & VIEWPORT ========== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <!-- ========== GOOGLE TAG MANAGER ========== -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -12,9 +12,10 @@
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-PD5FW35K');</script>
     
-    <!-- ========== CORE SEO TAGS ========== -->
-    <title>Xe Hợp Đồng Phan Rang | Đưa Đón Sân Bay Cam Ranh 24/7 - HTU Transport</title>
-    <meta name="description" content="Dịch vụ xe hợp đồng Phan Rang Tháp Chàm chuyên nghiệp. Đưa đón sân bay Cam Ranh, Liên Khương 24/7. Xe 4-7-16 chỗ, tài xế 5 sao. Giá tốt - Gọi 0567.033.888">
+    <!-- SEO -->
+    <title>Đưa Đón Sân Bay Cam Ranh - Liên Khương 24/7 | HTU Transport</title>
+    <meta name="description" content="Dịch vụ đưa đón sân bay Cam Ranh, Liên Khương chuyên nghiệp 24/7. Xe 4-7-16 chỗ, tài xế 5 sao. Hotline: 0567.033.888">
+    <link rel="canonical" href="https://htutransport.com/service/airport">
     
     <!-- ========== CANONICAL & LANGUAGE ========== -->
     <link rel="canonical" href="https://htutransport.com/">
@@ -39,13 +40,14 @@
     <meta property="og:image:height" content="630">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:alt" content="HTU Transport - Dịch vụ xe hợp đồng Phan Rang">
+    
     <!-- ========== TWITTER CARD ========== -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Xe Hợp Đồng Phan Rang - HTU Transport">
     <meta name="twitter:description" content="Đưa đón sân bay Cam Ranh, xe du lịch Ninh Thuận, dịch vụ 24/7. Liên hệ: 0567.033.888">
     <meta name="twitter:image" content="https://raw.githubusercontent.com/Datkep92/hoangtung/main/images/htu_og_1200x630.png">
     <meta name="twitter:image:alt" content="Dịch vụ xe hợp đồng Hà Tùng Phan Rang">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
     <!-- ========== FAVICONS & APP ICONS ========== -->
     <!-- ICO format (legacy browsers) -->
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
@@ -177,17 +179,17 @@
           crossorigin="anonymous" 
           referrerpolicy="no-referrer">
     
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" 
-          rel="stylesheet">
-    
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="/css/style.css" media="all">
-<link rel="stylesheet" href="/css/chatbot.css" media="all">
-<link rel="stylesheet" href="/css/service.css" media="all">
-<link rel="stylesheet" href="/css/pricing.css" media="all">
-<link rel="stylesheet" href="/css/sidebar.css" media="all">
-<link rel="stylesheet" href="/service/travel/travel.css" media="all">
-<link rel="stylesheet" href="/css/blog.css" media="all">
+    <link rel="stylesheet" href="/css/chatbot.css" media="all">
+    <link rel="stylesheet" href="/css/sidebar.css" media="all">
+    <link rel="stylesheet" href="/css/blog.css" media="all">
+    <link rel="stylesheet" href="/service/airport.css" media="all">
+    
 
 </head>
 <body class="travel-body">
@@ -479,6 +481,39 @@
             </div>
         </div>
     </section>
+    <!-- Mobile Navigation -->
+<nav class="bottom-tab-bar" role="navigation" aria-label="Menu di động">
+    <div class="tab-items">
+        <!-- Main - Link về trang chủ -->
+        <a href="/" class="tab-item">
+            <div class="tab-icon"><i class="fas fa-home"></i></div>
+            <div class="tab-label">Main</div>
+        </a>
+
+        <a href="/service" class="tab-item">
+            <div class="tab-icon"><i class="fas fa-car"></i></div>
+            <div class="tab-label">Dịch vụ</div>
+        </a>
+        
+        <!-- Đặt xe - Giữ nguyên chức năng scroll -->
+        <a href="javascript:void(0)" class="tab-item" onclick="scrollToBookingSection()">
+            <div class="tab-icon"><i class="fas fa-calendar-alt"></i></div>
+            <div class="tab-label">Đặt xe</div>
+        </a>
+        
+        <!-- Liên hệ - Vẫn giữ scroll tới phần contact -->
+        <a href="#contact" class="tab-item">
+            <div class="tab-icon"><i class="fas fa-phone"></i></div>
+            <div class="tab-label">Liên hệ</div>
+        </a>
+        
+        <!-- Bảng giá - Giữ nguyên -->
+        <a href="javascript:void(0)" class="tab-item" onclick="openFullPricingPage()" id="pricingTab">
+            <div class="tab-icon"><i class="fas fa-tag"></i></div>
+            <div class="tab-label">Bảng giá</div>
+        </a>
+    </div>
+</nav>
 <!-- Scripts -->
      <!-- Thêm Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
@@ -555,14 +590,17 @@
     });
 </script>
 
-<!-- Existing JS files (keep as is) -->
-<script src="/js/language.js" defer></script>
-<script src="/js/pricing.js" defer></script>
-<script src="/js/chatbot.js" defer></script>
-<script src="/js/sidebar.js" defer></script>
-<script src="/js/booking-telegram.js" defer></script>
-<script src="/js/footer-standalone.js" defer></script>
-<script src="/js/blog.js" defer></script>
+ <!-- Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js" defer></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database-compat.js" defer></script>
+    <!-- Scripts -->
+    <script src="/js/language.js" defer></script>
+    <script src="/js/pricing.js" defer></script>
+    <script src="/js/chatbot.js" defer></script>
+    <script src="/js/sidebar.js" defer></script>
+    <script src="/js/booking-telegram.js" defer></script>
+    <script src="/js/footer-standalone.js" defer></script>
+    <script src="/js/blog.js" defer></script>
 
 
 </body>

@@ -261,17 +261,17 @@
             </nav>
 
             <!-- CTA -->
-            <div class="hero-cta">
-                <a href="tel:0567033888"
-                   class="btn btn-primary btn-call"
-                   itemprop="areaServed">
-                    📞 0567 033 888
-                </a>
-
-                <button class="btn btn-outline" onclick="scrollToBooking()">
-                    🗓 Đặt xe online
-                </button>
-            </div>
+            <div class="hero-cta" itemprop="potentialAction" itemscope itemtype="https://schema.org/ReserveAction">
+    <meta itemprop="name" content="Đặt xe dịch vụ">
+    <a href="tel:0567033888" class="btn btn-primary btn-call" itemprop="target" aria-label="Gọi ngay để đặt xe">
+        <i class="fas fa-phone-alt" aria-hidden="true"></i> Gọi Ngay
+    </a>
+    <!-- SỬA DÒNG NÀY -->
+    <a href="javascript:void(0)" class="btn btn-outline" onclick="scrollToBookingSection()" aria-label="Đặt xe trực tuyến">
+        <i class="fas fa-calendar-alt" aria-hidden="true"></i> Đặt Xe
+    </a>
+    <!-- HẾT SỬA -->
+</div>
 
         </div>
     </div>
@@ -526,27 +526,33 @@
         </div>
     </section>
 </main>
-    <nav class="bottom-tab-bar" role="navigation" aria-label="Menu di động">
+    <!-- Mobile Navigation -->
+<nav class="bottom-tab-bar" role="navigation" aria-label="Menu di động">
     <div class="tab-items">
+        <!-- Main - Link về trang chủ -->
         <a href="/" class="tab-item">
-    <div class="tab-icon"><i class="fas fa-home"></i></div>
-    <div class="tab-label">Main</div>
-</a>
+            <div class="tab-icon"><i class="fas fa-home"></i></div>
+            <div class="tab-label">Main</div>
+        </a>
 
-<a href="/service" class="tab-item">
-    <div class="tab-icon"><i class="fas fa-car"></i></div>
-    <div class="tab-label">Dịch vụ</div>
-</a>
-
-        <!-- SỬA Ở ĐÂY -->
+        <a href="/service" class="tab-item">
+            <div class="tab-icon"><i class="fas fa-car"></i></div>
+            <div class="tab-label">Dịch vụ</div>
+        </a>
+        
+        <!-- Đặt xe - Giữ nguyên chức năng scroll -->
         <a href="javascript:void(0)" class="tab-item" onclick="scrollToBookingSection()">
             <div class="tab-icon"><i class="fas fa-calendar-alt"></i></div>
             <div class="tab-label">Đặt xe</div>
         </a>
-        <a href="javascript:void(0)" class="tab-item" id="tabContact">
-    <div class="tab-icon"><i class="fas fa-phone"></i></div>
-    <div class="tab-label">Liên hệ</div>
-</a>
+        
+        <!-- Liên hệ - Vẫn giữ scroll tới phần contact -->
+        <a href="#contact" class="tab-item">
+            <div class="tab-icon"><i class="fas fa-phone"></i></div>
+            <div class="tab-label">Liên hệ</div>
+        </a>
+        
+        <!-- Bảng giá - Giữ nguyên -->
         <a href="javascript:void(0)" class="tab-item" onclick="openFullPricingPage()" id="pricingTab">
             <div class="tab-icon"><i class="fas fa-tag"></i></div>
             <div class="tab-label">Bảng giá</div>

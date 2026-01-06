@@ -1,30 +1,5 @@
 
 
-        .cta-btn {
-            padding: 12px 28px;
-            background: rgba(0,0,0,0.8);
-            border: 2px solid var(--gold-primary);
-            border-radius: 50px;
-            color: var(--gold-secondary);
-            font-weight: 600;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            min-width: 160px;
-            justify-content: center;
-            backdrop-filter: blur(10px);
-        }
-
-        .cta-btn:hover {
-            background: var(--gold-primary);
-            color: var(--black-bg);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px var(--gold-glow);
-        }
-
         /* Main Tabs */
         .main-tabs {
             position: sticky;
@@ -585,3 +560,15 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(212, 175, 55, 0.2);
         }
+.hero-cta {
+    margin-top: 5px;
+}
+.hero-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.hero-wrapper .hero-cta {
+    margin-top: 0;
+}

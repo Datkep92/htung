@@ -209,23 +209,31 @@
 
     <nav class="bottom-tab-bar" role="navigation" aria-label="Menu di động">
     <div class="tab-items">
-        <a href="#gallery" class="tab-item">
+        <!-- Main - Link về trang chủ -->
+        <a href="https://htutransport.com" class="tab-item">
             <div class="tab-icon"><i class="fas fa-home"></i></div>
             <div class="tab-label">Main</div>
         </a>
-        <a href="#services" class="tab-item">
+        
+        <!-- Dịch vụ - Link về trang service -->
+        <a href="https://htutransport.com/service" class="tab-item">
             <div class="tab-icon"><i class="fas fa-car"></i></div>
             <div class="tab-label">Dịch vụ</div>
         </a>
-        <!-- SỬA Ở ĐÂY -->
+        
+        <!-- Đặt xe - Giữ nguyên chức năng scroll -->
         <a href="javascript:void(0)" class="tab-item" onclick="scrollToBookingSection()">
             <div class="tab-icon"><i class="fas fa-calendar-alt"></i></div>
             <div class="tab-label">Đặt xe</div>
         </a>
+        
+        <!-- Liên hệ - Vẫn giữ scroll tới phần contact -->
         <a href="#contact" class="tab-item">
             <div class="tab-icon"><i class="fas fa-phone"></i></div>
             <div class="tab-label">Liên hệ</div>
         </a>
+        
+        <!-- Bảng giá - Giữ nguyên -->
         <a href="javascript:void(0)" class="tab-item" onclick="openFullPricingPage()" id="pricingTab">
             <div class="tab-icon"><i class="fas fa-tag"></i></div>
             <div class="tab-label">Bảng giá</div>
@@ -239,14 +247,17 @@
                 <h2 id="servicesTitle" class="section-title">Các Dịch Vụ Chính</h2>
                 <p class="section-description">Đa dạng dịch vụ đáp ứng mọi nhu cầu di chuyển của quý khách</p>
             </div>
-            <div class="cta-buttons">
-                <a href="tel:0567033888" class="btn btn-primary">
-                    <i class="fas fa-phone-alt"></i> Gọi ngay
-                </a>
-                <a href="#booking" class="btn btn-outline">
-                    <i class="fas fa-calendar-alt"></i> Đặt xe
-                </a>
-            </div>
+            <div class="hero-cta" itemprop="potentialAction" itemscope itemtype="https://schema.org/ReserveAction">
+    <meta itemprop="name" content="Đặt xe dịch vụ">
+    <a href="tel:0567033888" class="btn btn-primary btn-call" itemprop="target" aria-label="Gọi ngay để đặt xe">
+        <i class="fas fa-phone-alt" aria-hidden="true"></i> Gọi Ngay
+    </a>
+    <!-- SỬA DÒNG NÀY -->
+    <a href="javascript:void(0)" class="btn btn-outline" onclick="scrollToBookingSection()" aria-label="Đặt xe trực tuyến">
+        <i class="fas fa-calendar-alt" aria-hidden="true"></i> Đặt Xe
+    </a>
+    <!-- HẾT SỬA -->
+</div>
             <div class="services-grid" id="servicesGrid">
                 <!-- Services sẽ được tải bằng JavaScript -->
             </div>
@@ -256,13 +267,17 @@
 
     
 
-    <!-- Thay đổi phần Scripts -->
-<script src="/js/language.js" defer></script>
-<script src="/js/pricing.js" defer></script>
-<script src="/js/chatbot.js" defer></script>
-<script src="/js/sidebar.js" defer></script>
-<script src="/js/booking-telegram.js" defer></script>
-<script src="/js/footer-standalone.js" defer></script>
+ <!-- Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js" defer></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-database-compat.js" defer></script>
+    <!-- Scripts -->
+    <script src="/js/language.js" defer></script>
+    <script src="/js/pricing.js" defer></script>
+    <script src="/js/chatbot.js" defer></script>
+    <script src="/js/sidebar.js" defer></script>
+    <script src="/js/booking-telegram.js" defer></script>
+    <script src="/js/footer-standalone.js" defer></script>
+    <script src="/js/blog.js" defer></script>
 <script src="/js/service.js" defer></script>
     <script>
         // URL Structure handler

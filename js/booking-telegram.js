@@ -777,3 +777,9 @@ if (window.completeBookingSystem) {
     };
 }
 new TelegramBooking();
+// Thêm vào cuối booking-telegram.js (trước dòng new TelegramBooking())
+window.bookingSystem = {
+    scrollToBooking: function() {
+        scrollToBookingSection();
+    }
+};
